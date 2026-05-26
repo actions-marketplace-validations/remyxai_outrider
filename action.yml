@@ -11,20 +11,14 @@ inputs:
       interest's detail page → "Workflow snippet" tab.
     required: true
   github-token:
-    description: |
+    description: >-
       GitHub token used for git push, PR / Issue creation, and the
       existing-PR dedup check. Leave empty for the standard same-repo
-      install — the action falls back to `${{ github.token }}` (the
-      workflow's built-in token, which has write access to the repo
-      the workflow runs in).
-
-      Override with a PAT only for cross-repo controller patterns
-      (action runs in repo A but writes PRs to repo B). The PAT
-      needs `repo` scope on the target.
-
-      (Empty default rather than `${{ github.token }}` because action
-      metadata input defaults don't have access to the `github`
-      context; the fallback happens in the step env instead.)
+      install — the action falls back to the workflow's built-in
+      github.token, which has write access to the repo the workflow
+      runs in. Override with a PAT only for cross-repo controller
+      patterns (action runs in repo A but writes PRs to repo B);
+      the PAT needs `repo` scope on the target.
     required: false
     default: ''
   min-confidence:
