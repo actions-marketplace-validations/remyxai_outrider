@@ -77,6 +77,7 @@ Visit your repo's **Actions** tab → **Remyx Recommendation** → **Run workflo
 | Input | Default | Description |
 |---|---|---|
 | `interest-id` | *(required)* | Remyx ResearchInterest UUID. |
+| `github-token` | `${{ github.token }}` | Token used for git push + PR/Issue creation. The default is the workflow's built-in `GITHUB_TOKEN`. Override with a PAT (`${{ secrets.MY_PAT }}`) only for cross-repo controller patterns. |
 | `min-confidence` | `moderate` | Tier gate: `high` / `moderate` / `low`. Recommendations below this are skipped. |
 | `draft-mode` | `always` | PR-draft policy: `always` (default), `on_test_failure`, or `never`. |
 | `rate-limit-days` | `7` | Skip if a previous Remyx PR was opened within this window. Set `0` to rely only on per-paper dedup. |

@@ -10,6 +10,19 @@ inputs:
       Remyx ResearchInterest UUID. Get it from engine.remyx.ai → your
       interest's detail page → "Workflow snippet" tab.
     required: true
+  github-token:
+    description: |
+      GitHub token used for git push, PR / Issue creation, and the
+      existing-PR dedup check. Defaults to the workflow's built-in
+      `${{ github.token }}` which has write access to the repo the
+      workflow runs in — that's the right token for the standard
+      same-repo install.
+
+      Override with a PAT only for cross-repo controller patterns
+      (action runs in repo A but writes PRs to repo B). The PAT
+      needs `repo` scope on the target.
+    required: false
+    default: ${{ github.token }}
   min-confidence:
     description: |
       Tier gate. Recommendations below this confidence are skipped.
@@ -95,6 +108,7 @@ runs:
       shell: bash
       env:
         TARGET_REPO: ${{ github.repository }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
         INPUT_INTEREST_ID: ${{ inputs.interest-id }}
         INPUT_MIN_CONFIDENCE: ${{ inputs.min-confidence }}
         INPUT_DRAFT_MODE: ${{ inputs.draft-mode }}
